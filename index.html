@@ -1,8 +1,230 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Claude Email</title></head>
-<body style="font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; line-height: 1.5">
-<h1>Claude Email</h1>
-<p>A personal tool that lets Kieran Lynch read and organize his own Gmail accounts from his own computer. It is not offered to anyone else.</p>
-<p><a href="privacy.html">Privacy policy</a></p>
-</body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kieran Lynch</title>
+<meta name="description" content="Kieran Lynch: PhD student in Electrical and Computer Engineering at the University of Virginia. Wireless communications, signal processing, and software.">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1d2330;
+    --muted: #5d6676;
+    --line: #e3e0d8;
+    --card: #ffffff;
+    --accent: #1f5fbf;
+    --accent-soft: #e8f0fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151c;
+      --fg: #e7e9ee;
+      --muted: #9aa3b5;
+      --line: #262b37;
+      --card: #181c25;
+      --accent: #7fb0ff;
+      --accent-soft: #1b2638;
+    }
+  }
+  * { box-sizing: border-box; }
+  :root { color-scheme: light dark; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  nav a { padding: 8px 0; }
+  @media (max-width: 480px) { nav { gap: 6px 14px; font-size: 14px; } nav .name { flex-basis: 100%; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  header.top { border-bottom: 1px solid var(--line); }
+  nav { display: flex; gap: 22px; align-items: center; padding: 18px 0; font-size: 15px; flex-wrap: wrap; }
+  nav .name { font-weight: 700; color: var(--fg); margin-right: auto; }
+  nav a { color: var(--muted); }
+  nav a:hover { color: var(--fg); text-decoration: none; }
+  .hero { padding: 64px 0 40px; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
+  .hero .role { color: var(--muted); font-size: 1.1rem; margin: 0 0 22px; }
+  .hero p.lede { font-size: 1.15rem; max-width: 36em; margin: 0 0 24px; }
+  .links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 8px 16px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--card); color: var(--fg); font-size: 15px;
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.primary { color: #0b1220; } }
+  .btn:hover { text-decoration: none; filter: brightness(0.97); border-color: var(--muted); }
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  section h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 0 0 20px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tag { background: var(--accent-soft); color: var(--accent); padding: 3px 11px; border-radius: 999px; font-size: 14px; }
+  .grid { display: grid; gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .card h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .card .meta { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  ul.plain { list-style: none; padding: 0; margin: 0; }
+  ul.plain li { padding: 6px 0; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 14px; }
+  @media (min-width: 640px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <nav>
+      <a class="name" href="#">Kieran Lynch</a>
+      <a href="#experience">Work</a>
+      <a href="research.html">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <div class="hero">
+    <h1>Kieran Lynch</h1>
+    <p class="role">Signal Processing Engineer at Zeta Associates &middot; PhD student in Electrical Engineering at the University of Virginia</p>
+    <p class="lede">
+      I work on signal processing and wireless communications: detectors and
+      geolocation algorithms by day, and by night a PhD on making radios work
+      through interference. I also build software tools on the side.
+    </p>
+    <div class="links">
+      <a class="btn primary" href="#experience">Work</a>
+      <a class="btn" href="research.html">Research</a>
+      <a class="btn" href="https://github.com/Kieran1494">GitHub</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+  </div>
+
+  <section id="experience">
+    <h2>Work</h2>
+    <p>
+      I'm a signal processing engineer at Zeta Associates, where I build
+      high-performance detectors and work with geolocation teams on the DSP
+      behind their results. Before that, I spent seven summers at Applied
+      Signals Intelligence testing radios in the field and writing the
+      software that connected them, from SDR self-tests to a drone-mounted
+      transmitter for calibrating direction finding. I studied electrical and
+      computer engineering at UVA and taught several of its courses along the
+      way.
+    </p>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+    <p>
+      I am a graduate student in
+      <a href="https://nikossidiropoulos.github.io/">Nikos Sidiropoulos's group</a>
+      at UVA. My PhD work is on interference-resilient communication: how a
+      receiver can excise interference with little loss in data rate, and how
+      it can find the timing it needs to do so quickly.
+    </p>
+    <div class="grid" style="margin-top:18px">
+      <div class="card">
+        <h3>High Rate Canonical Correlation Analysis (HRCCA)</h3>
+        <p>
+          A canonical-correlation approach to recovering a signal in the
+          presence of strong interference, with solvers, carrier frequency
+          offset estimation and a full OFDM pipeline implemented in Rust with
+          Python bindings.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Linearly Precoded Signal Alignment (SIGAL)</h3>
+        <p>
+          Precoding that aligns the desired signal so interference can be
+          removed while giving up very little rate, validated with Monte Carlo
+          simulation and over-the-air software-defined radio experiments. A companion timing-acquisition method uses a null-slot
+          spatial proxy, with a machine-checked identifiability proof in
+          Lean 4.
+        </p>
+        <div class="meta">
+          N. D. Sidiropoulos and K. Lynch, &ldquo;Linearly Precoded Signal
+          Alignment: How to Excise Interference with Little Rate Loss,&rdquo;
+          IEEE SPAWC 2025.<br>
+          <a href="https://doi.org/10.1109/SPAWC66079.2025.11143424">IEEE Xplore (DOI)</a>
+          &middot;
+          <a href="https://par.nsf.gov/biblio/10650483">Free copy (NSF PAR)</a>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:18px"><a href="research.html">Read more about my research &rarr;</a></p>
+    <div class="tags">
+      <span class="tag">Wireless communications</span>
+      <span class="tag">Interference mitigation</span>
+      <span class="tag">Software-defined radio</span>
+      <span class="tag">Optimization</span>
+      <span class="tag">Estimation and filtering</span>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="grid two">
+      <div class="card">
+        <h3>geolocate</h3>
+        <p>
+          Emitter geolocation from TDOA, FDOA, angle and power measurements,
+          with relativistic and atmospheric modeling, Cramer-Rao bounds and
+          Kalman-filter estimators.
+        </p>
+        <div class="meta">Rust, Python</div>
+      </div>
+      <div class="card">
+        <h3>channelizer</h3>
+        <p>
+          Oversampled polyphase filter bank channelizer and synthesis bank,
+          with channel-domain matched filtering, symbol-rate detection and
+          frequency-hop reconstruction.
+        </p>
+        <div class="meta">Rust, Python</div>
+      </div>
+      <div class="card">
+        <h3>ad936x</h3>
+        <p>
+          Real-time streaming and control for AD936x transceivers such as the
+          ADALM-Pluto, with a command-line recorder and player.
+        </p>
+        <div class="meta">Rust, libiio</div>
+      </div>
+      <div class="card">
+        <h3>Baseband compression</h3>
+        <p>
+          PCA over channelized frames, plus quantizers, closed-loop LPC and an
+          adaptive arithmetic coder for raw IQ, benchmarked on generated
+          waveforms.
+        </p>
+        <div class="meta">Rust, Python</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <ul class="plain">
+      <li>Email: <a href="mailto:kieran.lynch@virginia.edu">kieran.lynch@virginia.edu</a> &middot; <a href="mailto:kieranhky14@gmail.com">kieranhky14@gmail.com</a></li>
+      <li>GitHub: <a href="https://github.com/Kieran1494">github.com/Kieran1494</a></li>
+      <li>Group: <a href="https://nikossidiropoulos.github.io/group.html">Sidiropoulos group, UVA ECE</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    &copy; 2026 Kieran Lynch &middot;
+    <a href="privacy.html">Privacy policy</a>
+  </div>
+</footer>
+
+</body>
+</html>

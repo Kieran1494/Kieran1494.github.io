@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research | Kieran Lynch</title>
+<meta name="description" content="Interactive explainer of Kieran Lynch's PhD research: communicating reliably through interference with linearly precoded signal alignment.">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1d2330;
+    --muted: #5d6676;
+    --line: #e3e0d8;
+    --card: #ffffff;
+    --accent: #1f5fbf;
+    --accent-soft: #e8f0fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151c;
+      --fg: #e7e9ee;
+      --muted: #9aa3b5;
+      --line: #262b37;
+      --card: #181c25;
+      --accent: #7fb0ff;
+      --accent-soft: #1b2638;
+    }
+  }
+  * { box-sizing: border-box; }
+  :root { color-scheme: light dark; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  nav a { padding: 8px 0; }
+  @media (max-width: 480px) { nav { gap: 6px 14px; font-size: 14px; } nav .name { flex-basis: 100%; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  header.top { border-bottom: 1px solid var(--line); }
+  nav { display: flex; gap: 22px; align-items: center; padding: 18px 0; font-size: 15px; flex-wrap: wrap; }
+  nav .name { font-weight: 700; color: var(--fg); margin-right: auto; }
+  nav a { color: var(--muted); }
+  nav a:hover { color: var(--fg); text-decoration: none; }
+  .hero { padding: 64px 0 40px; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
+  .hero .role { color: var(--muted); font-size: 1.1rem; margin: 0 0 22px; }
+  .hero p.lede { font-size: 1.15rem; max-width: 36em; margin: 0 0 24px; }
+  .links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 8px 16px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--card); color: var(--fg); font-size: 15px;
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.primary { color: #0b1220; } }
+  .btn:hover { text-decoration: none; filter: brightness(0.97); border-color: var(--muted); }
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  section h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 0 0 20px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tag { background: var(--accent-soft); color: var(--accent); padding: 3px 11px; border-radius: 999px; font-size: 14px; }
+  .grid { display: grid; gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .card h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .card .meta { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  ul.plain { list-style: none; padding: 0; margin: 0; }
+  ul.plain li { padding: 6px 0; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 14px; }
+  @media (min-width: 640px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+
+  :root { --warn: #c2410c; --warn-soft: #fdeee4; --ok: #1f5fbf; }
+  @media (prefers-color-scheme: dark) { :root { --warn: #fb923c; --warn-soft: #2b1d14; } }
+  .back { font-size: 15px; color: var(--muted); margin: 0 0 8px; }
+  h1.page { font-size: clamp(2rem, 5vw, 2.7rem); line-height: 1.12; margin: 0 0 14px; letter-spacing: -0.02em; }
+  .lead { font-size: 1.15rem; margin: 0; max-width: 36em; }
+  section > h3 { font-size: 1.5rem; line-height: 1.25; margin: -6px 0 10px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: 0 0 20px; max-width: 40em; }
+  .note { font-size: 14px; color: var(--muted); }
+
+  /* pipeline */
+  .flow { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .flow li { flex: 1 1 120px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; position: relative; font-size: 14.5px; line-height: 1.4; }
+  .flow li b { display: block; font-size: 15.5px; margin-bottom: 2px; }
+  .flow li span { color: var(--muted); }
+  .flow li.hot { border-color: var(--accent); background: var(--accent-soft); }
+  .flow li.bad { border-color: var(--warn); background: var(--warn-soft); }
+
+  /* controls */
+  .controls { display: grid; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+  @media (min-width: 640px) { .controls { grid-template-columns: repeat(3, 1fr); } }
+  .ctl label { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); margin-bottom: 4px; }
+  .ctl output { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .panels { display: grid; gap: 14px; }
+  @media (min-width: 640px) { .panels { grid-template-columns: 1fr 1fr; } }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 12px; }
+  .panel h4 { margin: 0; font-size: 15px; }
+  .panel p { margin: 2px 0 8px; font-size: 13.5px; color: var(--muted); }
+  .big { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .big.warn { color: var(--warn); } .big.ok { color: var(--accent); }
+  .big small { font-size: 0.8rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  svg.fig { width: 100%; height: auto; display: block; }
+  svg.fig text { fill: var(--muted); font: 12px system-ui, sans-serif; }
+  svg.fig text.strong { fill: var(--fg); font-weight: 600; }
+  svg .axis { stroke: var(--line); stroke-width: 1; fill: none; }
+  svg .grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+  svg .ideal { fill: none; stroke: var(--fg); stroke-width: 1.2; opacity: .55; }
+  svg .pt-ok { fill: var(--accent); opacity: .65; }
+  svg .pt-bad { fill: var(--warn); opacity: .7; }
+  svg .ln-ok { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+  svg .ln-bad { stroke: var(--warn); stroke-width: 2.5; fill: none; stroke-dasharray: 7 4; }
+  svg .ln-mid { stroke: var(--fg); stroke-width: 2.2; fill: none; opacity: .6; }
+  svg .dot-mid { fill: var(--fg); opacity: .6; }
+  svg .dot-ok { fill: var(--accent); } svg .dot-bad { fill: var(--warn); }
+  svg .cur { stroke: var(--fg); stroke-width: 1; stroke-dasharray: 4 3; opacity: .6; }
+  svg .bar { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+  svg .bar.best { fill: var(--accent); }
+  svg .mark { fill: var(--warn); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); margin: 8px 0 0; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+  button.go { font: inherit; font-size: 14.5px; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+  @media (prefers-color-scheme: dark) { button.go { color: #0b1220; } }
+  button.go:hover { filter: brightness(1.06); }
+  .stats { display: grid; gap: 12px; grid-template-columns: 1fr; margin-top: 14px; }
+  @media (min-width: 480px) { .stats { grid-template-columns: 1fr 1fr; } }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+  .stat .l { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <nav>
+      <a class="name" href="index.html">Kieran Lynch</a>
+      <a href="index.html#experience">Work</a>
+      <a href="research.html" aria-current="page" style="color:var(--fg)">Research</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero" style="padding-bottom:30px">
+    <p class="back"><a href="index.html">&larr; Home</a></p>
+    <h1 class="page">Talking over a jammer</h1>
+    <p class="lead">
+      Two radios, one very loud interferer on the same frequency, and a
+      receiver that still gets the message. My PhD, with
+      <a href="https://nikossidiropoulos.github.io/">Nikos Sidiropoulos</a>
+      at UVA, is about how. Everything below runs live in your browser.
+    </p>
+  </div>
+
+  <section>
+    <h2>The idea in five steps</h2>
+    <ol class="flow">
+      <li><b>1. Precode</b><span>The transmitter spreads each packet over a few extra dimensions with a linear precoder, leaving those directions unused.</span></li>
+      <li class="bad"><b>2. Collide</b><span>An interferer, possibly hostile, lands on top of it.</span></li>
+      <li><b>3. Listen</b><span>The receiver has two antennas and hears two different mixtures.</span></li>
+      <li class="hot"><b>4. Align</b><span>It looks for the mix that is silent in the unused directions. Only a mix with no interference can be.</span></li>
+      <li><b>5. Decode</b><span>What is left is your packet. One known pilot symbol fixes the remaining scale and phase.</span></li>
+    </ol>
+  </section>
+
+  <section id="demo">
+    <h2>Try it</h2>
+    <h3>Turn the interference up</h3>
+    <p class="sub">
+      Each dot is a received QPSK symbol. A perfect receiver puts them on the four
+      rings. Both receivers below have two antennas. The left one just points a
+      null at whatever is loudest; the right one also uses the precoding. Slide
+      the interference from weak to overwhelming and compare.
+    </p>
+
+    <div class="controls">
+      <div class="ctl">
+        <label for="c-int">Interference <output id="o-int"></output></label>
+        <input id="c-int" type="range" min="-10" max="40" step="1" value="0">
+      </div>
+      <div class="ctl">
+        <label for="c-snr">Signal to noise <output id="o-snr"></output></label>
+        <input id="c-snr" type="range" min="5" max="30" step="1" value="18">
+      </div>
+      <div class="ctl">
+        <label for="c-e">Extra symbols per packet <output id="o-e"></output></label>
+        <input id="c-e" type="range" min="2" max="8" step="1" value="3">
+      </div>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <h4>Two antennas, no precoding help</h4>
+        <p>Null the loudest direction, then equalize.</p>
+        <svg id="sc-naive" class="fig" viewBox="0 0 300 300" role="img" aria-label="Scatter of received symbols without precoding help"></svg>
+        <div class="big warn" id="ser-naive"></div>
+      </div>
+      <div class="panel">
+        <h4>Aligned receiver</h4>
+        <p>Combine both antennas to cancel the unused directions.</p>
+        <svg id="sc-al" class="fig" viewBox="0 0 300 300" role="img" aria-label="Scatter of symbols from the aligned receiver"></svg>
+        <div class="big ok" id="ser-al"></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="l">Data rate if you send every packet twice</div>
+        <div class="big">50%</div>
+      </div>
+      <div class="stat">
+        <div class="l">Data rate with <span id="e-txt"></span> extra symbols</div>
+        <div class="big ok" id="rate"></div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:14px">
+      A simplified model: 16-symbol QPSK packets, two receive antennas, one
+      Gaussian interferer that does not know the precoder, and a fresh random
+      channel every packet. One symbol per packet is a known pilot, and the
+      data rate counts it as overhead. The real system adds pulse shaping,
+      synchronization and frequency-offset correction, and was tested over the
+      air.
+    </p>
+  </section>
+
+  <section>
+    <h2>How much does it help?</h2>
+    <h3>Error rate against interference strength</h3>
+    <p class="sub">
+      The same experiment swept across interference levels, recomputed whenever you move the noise or extra-symbol sliders.
+      The dashed line marks the current interference setting. A second antenna
+      alone handles overwhelming interference reasonably, but struggles when
+      the interferer is comparable to the signal; the precoded receiver stays
+      flat across the range.
+    </p>
+    <div class="panel">
+      <svg id="sweep" class="fig" viewBox="0 0 520 270" role="img" aria-label="Symbol error rate versus interference strength for both receivers"></svg>
+      <div class="legend">
+        <span><i style="background:var(--warn)"></i>One antenna</span>
+        <span><i style="background:var(--fg);opacity:.55"></i>Two antennas, no precoding help</span>
+        <span><i style="background:var(--accent)"></i>Aligned receiver</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why it works</h2>
+    <h3>Your packet is the only thing in two places at once</h3>
+    <p class="sub">
+      Precoding leaves a few directions unused. The packet never touches them
+      and the interference does. Two antennas make everything the receiver
+      hears lie in a two-dimensional space, and that space overlaps the set of
+      valid packets in exactly one line: the packet.
+    </p>
+    <div class="panel">
+      <svg class="fig" viewBox="0 0 600 300" role="img" aria-label="Two planes intersecting in a line: the set of valid packets, and everything the two antennas can hear. The packet is where they meet."><desc>Drawn in three dimensions for intuition. The real spaces have many more dimensions.</desc>
+        <polygon points="40,250 380,250 470,160 130,160" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+        <polygon points="120,205 410,205 450,55 160,55" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.5" opacity=".92"/>
+        <line x1="120" y1="205" x2="410" y2="205" stroke="var(--fg)" stroke-width="4" stroke-linecap="round"/>
+        <text class="strong" x="265" y="226" text-anchor="middle" style="font-size:14px">your packet</text>
+        <text x="60" y="275" style="font-size:13px">everything the transmitter could have sent</text>
+        <text x="300" y="90" text-anchor="middle" style="font-size:13px">everything the two antennas can hear</text>
+        <text x="300" y="108" text-anchor="middle" style="font-size:13px">(packet + interference)</text>
+        <text x="300" y="140" text-anchor="middle" class="strong" style="font-size:13px">the interference points out of the floor</text>
+      </svg>
+    </div>
+    <p class="note" style="margin-top:12px">
+      The earlier version of this idea, from our group, repeated every packet to
+      get the second view and so halved the rate. A linear precoder gets the
+      same overlap for the price of a few extra slots.
+    </p>
+  </section>
+
+  <section>
+    <h2>Finding the packet</h2>
+    <h3>The receiver has to know where to look</h3>
+    <p class="sub">
+      A receiver doesn't know when a packet starts. Slide a window along the
+      stream and ask how well each position lines up. Only the true packet
+      boundary can cancel the unused directions, so it stands out. It needs
+      enough interference to give the receiver something to cancel: turn the
+      interference down and the peak fades. This is the
+      idea behind my fast timing-acquisition method; the full version cheaply
+      screens the offsets before doing the expensive work, and its
+      identifiability argument is machine-checked in Lean 4.
+    </p>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+        <h4 style="margin:0">Window alignment along a captured stream</h4>
+        <button class="go" id="again" type="button">New capture</button>
+      </div>
+      <svg id="timing" class="fig" viewBox="0 0 520 220" role="img" aria-label="Alignment score for each window offset"></svg>
+      <div class="legend">
+        <span><i style="background:var(--accent)"></i>Best window</span>
+        <span><i style="background:var(--warn)"></i>True packet boundary</span>
+      </div>
+      <p class="note" id="t-read" style="margin:8px 0 0" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Real hardware</h2>
+    <h3>Not just a simulation</h3>
+    <p class="sub">
+      I built the whole thing on software-defined radios: transmitter,
+      receiver, pulse shaping, synchronization, carrier frequency offset
+      correction. Measured in a lab where signal and interference power are
+      known, then as an underlay transmission under a commercial Wi-Fi access
+      point on 2.4 GHz. The code is a Rust library with Python bindings, plus
+      a toolchain that transmits, captures IQ, decodes and reports error
+      rates.
+    </p>
+    <div class="tags">
+      <span class="tag">Rust</span><span class="tag">Python</span><span class="tag">MATLAB</span>
+      <span class="tag">PlutoSDR</span><span class="tag">Lean 4</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Paper</h2>
+    <div class="card">
+      <h3>Linearly Precoded Signal Alignment: How to Excise Interference with Little Rate Loss</h3>
+      <p>N. D. Sidiropoulos and K. Lynch. IEEE SPAWC, 2025.</p>
+      <div class="meta">
+        <a href="https://doi.org/10.1109/SPAWC66079.2025.11143424">IEEE Xplore (DOI)</a>
+        &middot;
+        <a href="https://par.nsf.gov/biblio/10650483">Free copy (NSF PAR)</a>
+        &middot; Supported by NSF ECCS-2433870
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    &copy; 2026 Kieran Lynch &middot; <a href="index.html">Home</a> &middot;
+    <a href="privacy.html">Privacy policy</a>
+  </div>
+</footer>
+
+<script src="sigal.js"></script>
+<script>
+(function () {
+  var L = 16;
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function txt(parent, x, y, s, attrs) {
+    var t = el('text', Object.assign({ x: x, y: y }, attrs || {}), parent);
+    t.textContent = s; return t;
+  }
+  function pct(v) { return (v * 100).toFixed(v < 0.1 ? 1 : 0) + '%'; }
+
+  function state() {
+    return { int: +$('c-int').value, snr: +$('c-snr').value, e: +$('c-e').value };
+  }
+
+  /* scatter */
+  function scatter(svg, pts, cls) {
+    svg.textContent = '';
+    var S = 100, C = 150;
+    el('line', { x1: 0, y1: C, x2: 300, y2: C, 'class': 'axis' }, svg);
+    el('line', { x1: C, y1: 0, x2: C, y2: 300, 'class': 'axis' }, svg);
+    var off = 0;
+    pts.forEach(function (p) {
+      var x = C + p[0] * S, y = C - p[1] * S;
+      if (x < 4 || x > 296 || y < 4 || y > 296) { off++; return; }
+      el('circle', { cx: x.toFixed(1), cy: y.toFixed(1), r: 2.4, 'class': cls }, svg);
+    });
+    [[1, 1], [-1, 1], [-1, -1], [1, -1]].forEach(function (q) {
+      el('circle', { cx: C + q[0] * S * Math.SQRT1_2, cy: C - q[1] * S * Math.SQRT1_2, r: 9, 'class': 'ideal' }, svg);
+    });
+    if (off) txt(svg, 296, 294, off + ' off the chart', { 'text-anchor': 'end' });
+  }
+
+  function demo() {
+    var s = state();
+    $('o-int').textContent = (s.int > 0 ? '+' : '') + s.int + ' dB';
+    $('c-int').setAttribute('aria-valuetext', $('o-int').textContent + ' compared with the signal');
+    $('c-snr').setAttribute('aria-valuetext', s.snr + ' dB');
+    $('c-e').setAttribute('aria-valuetext', s.e + ' extra symbols');
+    $('o-snr').textContent = s.snr + ' dB';
+    $('o-e').textContent = s.e;
+    $('e-txt').textContent = s.e;
+    var r = Sigal.run({ l: L, e: s.e, snr: s.snr, sir: -s.int }, 60);
+    scatter($('sc-naive'), r.blind, 'pt-bad');
+    scatter($('sc-al'), r.aligned, 'pt-ok');
+    $('ser-naive').innerHTML = pct(r.serB) + ' <small>symbols wrong</small>';
+    $('ser-al').innerHTML = pct(r.serA) + ' <small>symbols wrong</small>';
+    $('rate').textContent = Math.round(100 * (L - 1) / (L + s.e)) + '%';
+  }
+
+  /* sweep */
+  var sweepCache = null, sweepKey = '', sweepTimer = null;
+  function drawSweep() {
+    var s = state(), svg = $('sweep');
+    var key = s.snr + ':' + s.e;
+    if (key !== sweepKey) {
+      var pts = [];
+      Sigal.setSeed(2024);              // same random draws every time, so the curves are repeatable
+      for (var I = -10; I <= 40; I += 5) {
+        var r = Sigal.run({ l: L, e: s.e, snr: s.snr, sir: -I }, 200);
+        pts.push({ I: I, a: r.serA, b: r.serB, n: r.serN });
+      }
+      Sigal.useRandom();
+      sweepCache = pts; sweepKey = key;
+    }
+    svg.textContent = '';
+    var m = { l: 46, r: 14, t: 14, b: 40 }, W = 520, H = 270;
+    var pw = W - m.l - m.r, ph = H - m.t - m.b;
+    function X(I) { return m.l + (I + 10) / 50 * pw; }
+    function Y(v) { return m.t + (1 - v) * ph; }
+    [0, 0.25, 0.5, 0.75, 1].forEach(function (v) {
+      el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), 'class': v === 0 ? 'axis' : 'grid' }, svg);
+      txt(svg, m.l - 8, Y(v) + 4, Math.round(v * 100) + '%', { 'text-anchor': 'end' });
+    });
+    [-10, 0, 10, 20, 30, 40].forEach(function (I) {
+      txt(svg, X(I), H - m.b + 18, (I > 0 ? '+' : '') + I, { 'text-anchor': 'middle' });
+    });
+    txt(svg, m.l + pw / 2, H - 6, 'Interference compared with the signal (dB)', { 'text-anchor': 'middle' });
+    txt(svg, 12, m.t + ph / 2, 'Symbols wrong', { transform: 'rotate(-90 12 ' + (m.t + ph / 2) + ')', 'text-anchor': 'middle' });
+    txt(svg, m.l + 6, Y(0.75) - 6, 'guessing', { 'text-anchor': 'end' });
+    function line(key, cls, dot) {
+      el('polyline', { points: sweepCache.map(function (p) { return X(p.I) + ',' + Y(p[key]); }).join(' '), 'class': cls }, svg);
+      sweepCache.forEach(function (p) { el('circle', { cx: X(p.I), cy: Y(p[key]), r: 3.4, 'class': dot }, svg); });
+    }
+    line('n', 'ln-bad', 'dot-bad');
+    line('b', 'ln-mid', 'dot-mid');
+    line('a', 'ln-ok', 'dot-ok');
+    el('line', { x1: X(s.int), x2: X(s.int), y1: m.t, y2: m.t + ph, 'class': 'cur' }, svg);
+  }
+  function sweepSoon() {
+    clearTimeout(sweepTimer);
+    sweepTimer = setTimeout(drawSweep, 120);
+  }
+
+  /* timing */
+  var last = null;
+  function capture() {
+    var s = state();
+    var P = Sigal.precoder(L, s.e), n = P.n;
+    var off = Math.floor(Math.random() * n);
+    var t = Sigal.timing({ l: L, e: s.e, snr: s.snr, sir: -s.int, packets: 4, offset: off, span: 2 * n });
+    last = { t: t, n: n, off: off, e: s.e, s: s };
+    drawTiming();
+  }
+  function drawTiming() {
+    if (!last) return;
+    var svg = $('timing'), t = last.t, n = last.n, off = last.off;
+    svg.textContent = '';
+    // how many dB below the typical window each one scores; at least 20 dB of range so noise does not look like a find
+    var med = t.score.slice().sort(function (a, b) { return a - b; })[t.score.length >> 1];
+    var q = t.score.map(function (v) { return Math.max(0, 10 * Math.log10(med / (v + 1e-15))); });
+    var hi = Math.max.apply(null, q), lo = 0, span = Math.max(20, hi);
+    var best = q.indexOf(hi);
+    var m = { l: 14, r: 14, t: 18, b: 36 }, W = 520, H = 220;
+    var pw = W - m.l - m.r, ph = H - m.t - m.b, bw = pw / q.length;
+    el('line', { x1: m.l, x2: W - m.r, y1: m.t + ph, y2: m.t + ph, 'class': 'axis' }, svg);
+    q.forEach(function (v, i) {
+      var h = Math.max(2, (v - lo) / span * ph);
+      el('rect', { x: m.l + i * bw + 1, y: m.t + ph - h, width: Math.max(1, bw - 2), height: h, rx: 2, 'class': 'bar' + (i === best ? ' best' : '') }, svg);
+    });
+    for (var b = off; b < q.length; b += n) {
+      var cx = m.l + b * bw + bw / 2;
+      el('polygon', { points: (cx - 6) + ',' + (m.t + ph + 16) + ' ' + (cx + 6) + ',' + (m.t + ph + 16) + ' ' + cx + ',' + (m.t + ph + 5), 'class': 'mark' }, svg);
+    }
+    txt(svg, m.l, H - 4, 'window start (samples) \u2192', {});
+    txt(svg, W - m.r, 12, 'better aligned (dB below a typical window) \u2191', { 'text-anchor': 'end' });
+    var ok = (best % n) === (off % n);
+    $('t-read').textContent = 'The best window starts at sample ' + best + '. The true packet boundaries are at ' +
+      (function () { var a = []; for (var b = off; b < q.length; b += n) a.push(b); return a.join(' and '); })() +
+      (ok ? '. Found it.' : '. Missed this time. The trick needs enough interference to cancel and a bit of margin; try more interference, less noise or more extra symbols.');
+  }
+
+  ['c-int', 'c-snr', 'c-e'].forEach(function (id) {
+    $(id).addEventListener('input', function () { demo(); sweepSoon(); if (id === 'c-int') drawSweep(); capture(); });
+  });
+  $('again').addEventListener('click', capture);
+  demo(); drawSweep(); capture();
+})();
+</script>
+</body>
+</html>
